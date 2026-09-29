@@ -6,21 +6,12 @@ The ordinary gradient is replaced by a Caputo fractional gradient that, coordina
 
 $$
 \begin{aligned}
-d_t &= \mathrm{diag}\bigl(\,^{c}D_x I(\theta_{t,j})\bigr)^{-1} \cdot {}^{c}\nabla_x f(\theta_t) + \beta \cdot \mathrm{diag}\bigl(|\theta_{t,j}-c_j|\bigr) \cdot {}^{c}\nabla_x^{1+\alpha} f(\theta_t) \\[8pt]
-\theta_{t+1} &= \theta_t - \eta \, d_t
+d_t &= \mathrm{diag}\!\left(\,{}^{C}_{c}D_x I(\theta_{t,j})\right)^{-1}\, {}^{C}_{c}\nabla_x f(\theta_t) + \beta \cdot \mathrm{diag}\!\left(|\theta_{t,j}-c_j|\right)\, {}^{C}_{c}\nabla_x^{\,1+\alpha} f(\theta_t) \\
+\theta_{t+1} &= \theta_t - \eta\, d_t && \text{(CfGD)} \\
+m_t &= \beta_1 m_{t-1} + (1-\beta_1)\, d_t, \qquad v_t = \beta_2 v_{t-1} + (1-\beta_2)\, d_t^2 \\
+\hat m_t &= \frac{m_t}{1-\beta_1^{\,t}}, \qquad \hat v_t = \frac{v_t}{1-\beta_2^{\,t}} \\
+\theta_{t+1} &= \theta_t - \eta\, \frac{\hat m_t}{\sqrt{\hat v_t}+\epsilon} && \text{(CfAdam)}
 \end{aligned}
-\qquad \text{(CfGD)}
-$$
-
-$$
-\begin{aligned}
-m_t &= \beta_1 m_{t-1} + (1-\beta_1)\, d_t \\
-v_t &= \beta_2 v_{t-1} + (1-\beta_2)\, d_t^2 \\[6pt]
-\hat{m}_t &= \dfrac{m_t}{1-\beta_1^t},\qquad
-\hat{v}_t = \dfrac{v_t}{1-\beta_2^t} \\[8pt]
-\theta_{t+1} &= \theta_t - \eta \dfrac{\hat{m}_t}{\sqrt{\hat{v}_t}+\epsilon}
-\end{aligned}
-\qquad \text{(CfAdam)}
 $$
 
 where ${}^{c}\nabla_x^{\alpha} f$ is the Caputo fractional gradient of order $\alpha \in (0,1)$ with per-coordinate integral terminal $c=(c_j)$, ${}^{c}\nabla_x^{1+\alpha} f$ its order-$(1+\alpha)$ counterpart, $d_t$ the resulting Caputo fractional-based gradient (replacing the ordinary $g_t$), $\eta$ the learning rate, $\beta \in \mathbb{R}$ the smoothing weight, $m_t,v_t$ the first/second moments with decays $\beta_1,\beta_2$, and $\epsilon$ a stability constant.
