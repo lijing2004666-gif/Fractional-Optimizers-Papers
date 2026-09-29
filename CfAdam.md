@@ -2,7 +2,7 @@
 
 Implements CfGD / CfAdam, gradient descent and Adam driven by a Caputo fractional-based gradient.
 
-The ordinary gradient is replaced by a Caputo fractional gradient that, coordinate-wise, mixes the order-$\alpha$ and order-$(1+\alpha)$ Caputo derivatives taken from a lower/upper integral terminal $c$. By Theorem 2.3 this direction is the steepest-descent direction of a smoothing $cF_{\alpha,\beta}$ of the objective, so the parameters $\alpha,\beta$ act as an implicit regularizer that can mitigate the dependence on the condition number; $\alpha = 1$, $\beta = 0$ recovers the ordinary gradient. CfGD plugs this direction into gradient descent; CfAdam is standard Adam with its gradient replaced by the same Caputo fractional-based gradient.
+The ordinary gradient is replaced by a Caputo fractional gradient that, coordinate-wise, mixes the order- $\alpha$ and order- $(1+\alpha)$ Caputo derivatives taken from a lower/upper integral terminal $c$. By Theorem 2.3 this direction is the steepest-descent direction of a smoothing $cF_{\alpha,\beta}$ of the objective, so the parameters $\alpha,\beta$ act as an implicit regularizer that can mitigate the dependence on the condition number; $\alpha = 1$, $\beta = 0$ recovers the ordinary gradient. CfGD plugs this direction into gradient descent; CfAdam is standard Adam with its gradient replaced by the same Caputo fractional-based gradient.
 
 $$
 \begin{aligned}
